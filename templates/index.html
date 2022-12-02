@@ -54,29 +54,6 @@
     <br><br>
 
     <div class="row text-center">
-<!--        add customes div-->
-        <!-- <div class="col-lg-4 col-md-6">
-            <a href="{% url 'supplier:list_supplier' %}">
-                <div class="panel panel_bg_color" >
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <i class="fa fa-user fa-4x" style="color:#fff"></i>
-                            </div>
-
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <div class="panel_txt">Suppliers</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div> -->
-<!--        add ledger div-->
         {% if request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_LEDGER_VIEW or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_OWNER or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_VIEW_ACCOUNT %}
         <div class="col-lg-4 col-md-6 ">
             <a href="{% url 'ledger:customer_ledger_list' %}">
@@ -123,26 +100,7 @@
         </div>
         {% endif %}
         {% if request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_SALESMAN or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_OWNER or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_VIEW_ACCOUNT %}
-        <!-- <div class="col-lg-4 col-md-6">
-            <a href="{% url 'expense:expense_list' %}">
-                <div class="panel panel_bg_color">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <i class="fa fa-money fa-4x" style="color:#fff"></i>
-                            </div>
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <div class="panel_txt">EXPENSE</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div> -->
+        
         {% endif %}
         <!--add sales div -->
         {% if request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_SALESMAN or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_OWNER or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_VIEW_ACCOUNT %}
@@ -167,97 +125,10 @@
             </a>
         </div>
         {% endif %}
-        <!--add employees div -->
-        {% if request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_SALESMAN or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_OWNER or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_VIEW_ACCOUNT %}
-        <!-- <div class="col-lg-4 col-md-6 ">
-            <a href="{% url 'employee:employee_list' %}">
-                <div class="panel panel_bg_color">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <i class="fa fa-users fa-4x" style="color:#fff"></i>
-                            </div>
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <div class="panel_txt" >EMPLOYEES</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div> -->
-        {% endif %}
-        <!--add FEEDBACK div -->
-        {% if request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_SALESMAN or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_OWNER or request.user.retailer_user.role_type == request.user.retailer_user.ROLE_TYPE_VIEW_ACCOUNT %}
-        <!-- <div class="col-lg-4 col-md-6 ">
-            <a href="{% url 'create_feedback' %}">
-                <div class="panel panel_bg_color">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <i class="fa fa-folder-open fa-4x" style="color:#fff"></i>
-                            </div>
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <div class="panel_txt">FeedBack</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div> -->
-        {% endif %}
-        <!--add reports div -->
-        <!-- <div class="col-lg-4 col-md-6 ">
-            <a href="{% url 'reports' %}">
-                <div class="panel panel_bg_color">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <i class="fa fa-th fa-4x" style="color:#fff"></i>
-                            </div>
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <div class="panel_txt">REPORTS</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div> -->
-        <!--add logs div -->
+       
     </div>
-    <!-- <div class="row">
-        <div class="col-lg-4 col-md-6 ">
-            <a href="{% url 'product:daily_stock_logs' %}">
-                <div class="panel panel_bg_color">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <i class="fa fa-sign-in fa-4x" style="color:#fff"></i>
-                            </div>
-                            <div class="col-xs-12 text-center">
-                                <br>
-                                <br>
-                                <div class="panel_txt">Historique</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div> -->
+    
+    
     <br>
     
 <!--col-div end here--->
