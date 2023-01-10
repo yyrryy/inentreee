@@ -37,9 +37,9 @@ def addbulk(request):
     for d in df.itertuples():
         product = Product.objects.create(
             retailer=retailer,
-            name=d.name,
-            brand_name=d.brand,
-            price=d.pr,
+            name=d.article,
+            brand_name=d.marque,
+            price=d.prix,
         )
         StockIn.objects.create(
             product=product,
@@ -292,7 +292,6 @@ class ClaimedItemsListView(TemplateView):
 class StockItemList(ListView):
     template_name = 'products/stock_list.html'
     model = Product
-    paginate_by = 50
     ordering = 'name'
 
     def dispatch(self, request, *args, **kwargs):
@@ -320,7 +319,7 @@ class StockItemList(ListView):
         context = super(StockItemList, self).get_context_data(**kwargs)
         context.update({
             'search_value_name': self.request.GET.get('name'),
-            'title':"Liste de produits"
+            'title':"Liste des produits"
         })
         return context
 

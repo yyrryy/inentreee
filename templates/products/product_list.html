@@ -39,6 +39,11 @@
                             <td>{{ item.product_purchased_items|floatformat:-2 }}</td>
                             <td>{{ item.bar_code}}</td>
                             <td>
+                                <!-- new code -->
+                                <a href="{% url 'product:update_product' pk=item.id %}"><button class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button></a>
+                                <a href="{% url 'product:stockin_list' product_id=item.id %}"><button class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></button></a>
+                                <a href="{% url 'product:stockout_list' product_id=item.id %}"><button class="btn btn-danger btn-xs" title="Stock Out"><i class="fa fa-minus"></i></button></a>
+                                <!-- old code 
                                 <a href="{% url 'product:add_product_items' product_id=item.id %}"><button class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></button></a>
                                 <a href="{% url 'product:item_details' pk=item.id %}"><button class="btn btn-success btn-xs"><i class="fa fa-eye"></i></button></a>
                             </td>
