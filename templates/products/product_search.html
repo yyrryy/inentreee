@@ -2,7 +2,8 @@
     <tr>
         <td>{{ item.name}}</td>
         <td class="#">{{ item.brand_name }}</td>
-        <td>{{ item.product_available_items|floatformat:-2 }}</td>
+        <td>{{ item.product_available_items}}</td>
+        <td>{{ item.price}}</td>
     </tr>
 {% empty %}
     <tr>

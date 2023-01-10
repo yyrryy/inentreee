@@ -1,3 +1,2 @@
 import os
-os.system("py manage.py runserver")
-
+os.system('py manage.py runserver')

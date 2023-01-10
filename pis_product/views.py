@@ -21,7 +21,6 @@ from pis_retailer.models import Retailer
 def product_search(request):
     name=request.POST.get('name')
     products= request.user.retailer_user.retailer.retailer_product.all().filter(name__icontains=name)
-    print(products)
     return JsonResponse({
         'data': render(request, 'products/product_search.html', {'products': products}).content.decode('utf-8')
     })

@@ -66,8 +66,8 @@
 
     <link href="{% static 'css/profileImage.css' %}" rel="stylesheet" type="text/css"/>
     <link href="{% static 'css/sweetalert2.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/select2.min.css' %}" rel="stylesheet" />
     <script src="{% static 'js/jquery.min.1.7.js'%}"></script>
-    <script src="{% static 'js/highcharts.js' %}"></script>
 </head>
 
 <body>
@@ -117,11 +117,14 @@
 <!-- js placed at the end of the document so the pages load faster -->
 {% block scripts %}
 <script src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
+<script src="{% static 'js/select2.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/zabuto_calendar.js' %}"></script>
+<script src="{% static 'js/zabuto_calendar.js' %}"></script>
+
 <script type="application/javascript">
         $(document).ready(function () {
-            
+            $('.select2').select2();
 
             $("#my-calendar").zabuto_calendar({
                 action: function () {
