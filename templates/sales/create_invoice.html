@@ -48,7 +48,7 @@
 							<div><strong>Client:</strong> </div><br>
 							<div class="existing-customer">
                                 <span class="customererror" style="color: red; display: none">N'existe pas, ajouter le</span>
-                                <input class="form-control customer" id="customer-id" placeholder="Customer" list="customer-list" >
+                                <input autocomplete="off" class="form-control customer" id="customer-id" placeholder="Customer" list="customer-list" >
                                 <datalist id="customer-list">
                                     {% for customer in customers %}
                                         <option data-id="{{ customer.id }}" value="{{ customer.customer_name }}">{{ customer.customer_phone }}</option>
@@ -59,8 +59,8 @@
                             </div>
                             <div id="new-customer-form" class="new-customer-form" style="display: none">
                                 <span class="already-error" style="color: red; display: none">This Customer Already exist</span>
-                                <input type="text" class="form-control customer_name" name="customer_name" placeholder="Customer Name"><br>
-                                <input type="number" class="form-control customer_phone" name="customer_phone" placeholder="Customer Phone"><br>
+                                <input autocomplete="off" type="text" class="form-control customer_name" name="customer_name" placeholder="Customer Name"><br>
+                                <input autocomplete="off" type="number" class="form-control customer_phone" name="customer_phone" placeholder="Customer Phone"><br>
                                 <a class="added-customer" style="cursor: pointer;">Existing Customer</a><br><br>
                             </div>
 
@@ -78,13 +78,13 @@
                                         <td></td>
                                         <td></td>
                                         <td class="text-right"><strong>Discount</strong></td>
-                                        <td><input class="form-control" id="discount" value="0" type="text"></td>
+                                        <td><input autocomplete="off" class="form-control" id="discount" value="0" type="text"></td>
                                     </tr>
                                     <tr hidden>
                                         <td></td>
                                         <td></td>
                                         <td class="text-right"><strong>Shipping</strong></td>
-                                        <td><input class="form-control" id="shipping" value="0" type="text"></td>
+                                        <td><input autocomplete="off" class="form-control" id="shipping" value="0" type="text"></td>
                                     </tr>
                                     
                                     <tr>
@@ -105,7 +105,7 @@
                                         <td></td>
                                         <td></td>
                                         <td class="text-right"><strong>Mtt payé</strong></td>
-                                        <td><input class="form-control" id="paidAmount" value="0" type="text"></td>
+                                        <td><input autocomplete="off" class="form-control" id="paidAmount" value="0" type="text"></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -202,7 +202,7 @@
                         code: barcode
                     }, function (result, status) {
                         {# Create Item list by scanning the bar code #}
-                        $(".item-row:last").after('<tr class="item-row"><td id="item-name" class="item-name"><div class="delete-btn"><input type="text" class="form-control invoice-item" id="invoice-item" name="all-items" list="all-items" placeholder="Select Item" type="text" value="' + result.product_name + '"><a class=' + $.opt.delete.substring(1) + ' href="javascript:;" title="Remove row">X</a></div></td><td>------' + result.stock + '</td><td><input class="form-control price" placeholder="Price" type="text" value="' + result.product_price + '"> </td><td><input class="form-control qty" placeholder="Quantity" value="1" type="text"></td><td><span class="total">' + result.product_price + '</span></td></tr>');
+                        $(".item-row:last").after('<tr class="item-row"><td id="item-name" class="item-name"><div class="delete-btn"><input autocomplete="off" type="text" class="form-control invoice-item" id="invoice-item" name="all-items" list="all-items" placeholder="Select Item" type="text" value="' + result.product_name + '"><a class=' + $.opt.delete.substring(1) + ' href="javascript:;" title="Remove row">X</a></div></td><td>------' + result.stock + '</td><td><input autocomplete="off" class="form-control price" placeholder="Price" type="text" value="' + result.product_price + '"> </td><td><input autocomplete="off" class="form-control qty" placeholder="Quantity" value="1" type="text"></td><td><span class="total">' + result.product_price + '</span></td></tr>');
                         $('.item-row:last').click();
 
                         {# Auto Scoll at the bottom of item list #}

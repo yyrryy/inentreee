@@ -33,6 +33,7 @@ class AddNewLedger(FormView):
             'payment_amount': self.request.POST.get('payment_amount'),
             'payment_type': self.request.POST.get('payment_type'),
             'description': self.request.POST.get('description'),
+            
         }
 
         ledger_form = LedgerForm(ledger_form_kwargs)
@@ -50,7 +51,8 @@ class AddNewLedger(FormView):
             retailer=self.request.user.retailer_user.retailer)
 
         context.update({
-            'customers': customers
+            'customers': customers,
+            'title':'Ajouter un nouveau client'
         })
 
         return context
@@ -91,7 +93,8 @@ class AddLedger(FormView):
             raise Http404('Customer not found with concerned User')
 
         context.update({
-            'customer': customer
+            'customer': customer,
+            'title':'Ajouter un nouveau client'
         })
         return context
 
@@ -185,15 +188,20 @@ class CustomerLedgerDetailsView(TemplateView):
             )
         except Customer.DoesNotExist:
             raise Http404
-
+        print(customer.customer_name)
         ledgers = customer.customer_ledger.all()
+        print(ledgers)
         if ledgers:
-            ledger_total = 0 if ledgers.aggregate(Sum('amount')) == None else ledgers.aggregate(Sum('amount'))
-            print(ledgers[0].amount)
-            ledger_total = float(ledger_total.get('amount__sum'))
-            context.update({
+            if (not ledgers.aggregate(Sum('amount')) == None):
+                ledger_total = 0
+            else:
+                ledger_total= ledgers.aggregate(Sum('amount'))
+                print(ledgers[0].amount)
+                print(ledger_total)
+                ledger_total = float(ledger_total.get('amount__sum'))
+                context.update({
 
-            })
+                })
         else:
             ledger_total = 0
 
