@@ -20,7 +20,7 @@
                 {% for stockout in object_list %}
                     <tr>
                         <td>{{ stockout.stock_out_quantity|floatformat:-2 }} </td>
-                        <td>{{ stockout.dated}}</td>
+                        <td>{{ stockout.dated|date:"d/m/Y"}}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
