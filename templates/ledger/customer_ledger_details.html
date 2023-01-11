@@ -31,7 +31,7 @@
                             <tbody class="item-table-body text-center">
                             {% for ledger in ledgers %}
                             <tr>
-                                <td>{{ ledger.dated }}</td>
+                                <td>{{ ledger.dated |date:'d/m/Y' }}</td>
                                 <td>{{ ledger.amount|floatformat:-2}}</td>
                                 <td>{{ ledger.invoice.receipt_no }}</td>
                                 <td>{{ ledger.description }}</td>

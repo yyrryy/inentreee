@@ -43,7 +43,7 @@
                                 {% if invoice.remaining_payment > 0 %}
                                 <a href="{% url 'sales:invoice_update' id=invoice.id %}"><button class="btn btn-primary btn-xs"><i class="fa fa-edit" title="Invoice list"></i></button>{%endif%}</a>
                                 <a href="{% url 'sales:invoice_detail' invoice_id=invoice.id %}"><button class="btn btn-success btn-xs"><i class="fa fa-eye" title="Invoice list"></i></button></a>
-                                <a href="{% url 'sales:delete' pk=invoice.id %}"><button class="btn btn-danger btn-xs delete" onClick="deleteFunction()"><i class="fa fa-minus"></i></button></td>
+                                <button class="btn btn-danger btn-xs" onClick="deleteFunction({{invoice.id}})"><i class="fa fa-minus"></i></button></td>
 
                             </td>
                         </tr>
@@ -82,11 +82,14 @@ $('#invoice').on('click', function() {
 </script>
 <script>
     function deleteFunction(e) {
-            if(!confirm("Supprimer ?")){
-                e.preventDefault();
-            }else{
-             $('.delete').submit();
-            }
+        c=confirm("Supprimer ?");
+        if (c==true){
+            // go to a
+            window.location.href=`/sales/invoice/${e}/delete/`
+        }
+        else{
+            return false;
+        }
         }
 </script>
 

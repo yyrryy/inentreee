@@ -227,7 +227,7 @@ class GenerateInvoiceAPIView(View):
                         'invoice': self.invoice.id,
                         'amount': remaining_payment,
                         'description': (
-                            'No %s'
+                            'Bon No %s'
                             % self.invoice.receipt_no),
                         'dated': timezone.now()
                     }

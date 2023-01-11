@@ -29,7 +29,7 @@
                           
                           <br>
                           <input type="hidden" name="retailer" value="{{ request.user.retailer_user.retailer.id }}">
-                          <button type="button" id="save" class="btn btn-primary ledger-submit-btn" style="float: right" id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>Processing Order">Save Ledger </button>
+                          <button type="button" id="save" class="btn btn-primary ledger-submit-btn" style="float: right" id="load" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>Processing Order">Enregistrer </button>
                     </div>
                 </div>
             </form>
@@ -98,7 +98,7 @@
                 }
                  else {
                      $(this).removeClass('disabled');
-                     $(this).html('Save Ledger');
+                     $(this).html('Enregistrer');
                      return;
                  }
             });
