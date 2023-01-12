@@ -226,9 +226,7 @@ class GenerateInvoiceAPIView(View):
                             self.customer.id),
                         'invoice': self.invoice.id,
                         'amount': remaining_payment,
-                        'description': (
-                            'Bon No %s'
-                            % self.invoice.receipt_no),
+                        
                         'dated': timezone.now()
                     }
 
@@ -286,7 +284,7 @@ class InvoicesList(ListView):
     def get_context_data(self, **kwargs):
         context = super(InvoicesList, self).get_context_data(**kwargs)
         context.update({
-            'title':'Liste des factures',
+            'title':'Liste des Bons',
         })
         return context
 

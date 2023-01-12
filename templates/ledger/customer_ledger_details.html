@@ -25,7 +25,6 @@
                                 <th class="text-center">Date</th>
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Facture</th>
-                                <th class="text-center">Description</th>
                             </tr>
                             </thead>
                             <tbody class="item-table-body text-center">
@@ -34,7 +33,6 @@
                                 <td>{{ ledger.dated |date:'d/m/Y' }}</td>
                                 <td>{{ ledger.amount|floatformat:-2}}</td>
                                 <td>{{ ledger.invoice.receipt_no }}</td>
-                                <td>{{ ledger.description }}</td>
                             </tr>
                             {% endfor %}
                             </tbody>
