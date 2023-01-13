@@ -7,7 +7,7 @@ from pis_com.models import DatedModel
 
 class Retailer(DatedModel):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(blank=False)
+    slug = models.CharField(max_length=100)
     package = models.CharField(max_length=200, null=True, blank=True)
     package_price = models.CharField(max_length=200, null=True, blank=True)
     package_expiry = models.DateField(blank=True, null=True)
