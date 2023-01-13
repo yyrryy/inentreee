@@ -71,6 +71,7 @@ class ProductItemAPIView(View):
                 'name': product.name,
                 'brand_name': product.brand_name,
                 'consumer_price': product.price,
+                'pr_achat':product.pr_achat
             }
 
             if product.stockin_product.exists():

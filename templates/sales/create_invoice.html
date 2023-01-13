@@ -131,7 +131,8 @@
                                     <tr class="item-row">
                                         <th>Article</th>
                                         <th>Stock</th>
-                                        <th>Prix</th>
+                                        <th>Prix Achat</th>
+                                        <th>Prix Vent</th>
                                         <th>Qté</th>
                                         <th>Total</th>
                                     </tr>
@@ -226,6 +227,8 @@
 
                 var stock = $(this).parent().parent().find("option[value='" + $(this).val() + "']").data('stock')
                 $(this).parent().parent().parent().find('.stock').html(stock);
+                var prch = $(this).parent().parent().find("option[value='" + $(this).val() + "']").data('prachat')
+                $(this).parent().parent().parent().find('.prch').html(prch);
             });
             $('#create-invoice').live('click', function () {
                 if ($('#item-name').hasClass('item-name') == false || $('#customer-id').val()=='') {

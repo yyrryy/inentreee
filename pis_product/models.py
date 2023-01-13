@@ -16,6 +16,7 @@ class Product(models.Model):
         related_name='retailer_product',on_delete=models.CASCADE
     )
     price=models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    pr_achat=models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     bar_code = models.CharField(max_length=13, unique=True, blank=True,
                                 null=True)
 

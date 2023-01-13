@@ -40,6 +40,7 @@ def addbulk(request):
             name=d.article,
             brand_name=d.marque,
             price=d.prix,
+            pr_achat=d.prachat
         )
         StockIn.objects.create(
             product=product,

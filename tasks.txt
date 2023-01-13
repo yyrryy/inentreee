@@ -16,3 +16,6 @@ then assign it to retailer-user in retailer model
 tasks
 horizontal menu
 ajax not refresh
+
+
+prix d achat dans le bon, page d'acceuille
