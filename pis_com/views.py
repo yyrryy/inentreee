@@ -54,13 +54,7 @@ class LoginView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(LoginView, self).get_context_data(**kwargs)
-        try:
-            admin_config = AdminConfiguration.objects.get(id=1)
-            context.update({
-                'config': admin_config
-            })
-        except AdminConfiguration.DoesNotExist:
-            pass
+        
         return context
 
 
