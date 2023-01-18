@@ -4,8 +4,7 @@ from django.urls import path, include,re_path
 from pis_com.views import HomePageView
 from pis_com.views import LoginView
 from pis_com.views import LogoutView
-from pis_com.views import (
-    home, CreateCustomer, CustomerTemplateView, CustomerUpdateView, CreateFeedBack)
+from pis_com.views import (CreateCustomer, CustomerTemplateView, CustomerUpdateView, CreateFeedBack)
 from pis_com.views import ReportsView, test
 
 urlpatterns = [

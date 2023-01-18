@@ -17,5 +17,6 @@ tasks
 horizontal menu
 ajax not refresh
 
-
-prix d achat dans le bon, page d'acceuille
+faacteurization pour les clients sous form de societé
+details des produits 
+products in pages

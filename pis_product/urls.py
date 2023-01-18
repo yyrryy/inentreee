@@ -8,7 +8,7 @@ from .views import (
     PurchasedItems, ExtraItemsView, ClaimedProductFormView,
     ClaimedItemsListView, StockItemList, AddStockItems, StockOutItems,
     StockDetailView, StockInListView, StockOutListView, ProductUpdateView,
-    StockInUpdateView, addbulk, product_search
+    StockInUpdateView, addbulk, product_search, deleteproduct
 )
 
 from pis_product.logs_view import DailyStockLogs, MonthlyStockLogs
@@ -34,6 +34,7 @@ urlpatterns = [
     re_path(r'^(?P<product_id>\d+)/stock/out/$',StockOutListView.as_view(),name='stockout_list'),
     re_path(r'^(?P<pk>\d+)/update/$',ProductUpdateView.as_view(),name='update_product'),
     re_path(r'^(?P<pk>\d+)/stockin/update/$',StockInUpdateView.as_view(),name='update_stockin'),
+    re_path(r'^items/deleteproduct/',deleteproduct, name='delete_product'),
 
     # Logs
     re_path(r'^stock/logs/daily/$', DailyStockLogs.as_view(),name='daily_stock_logs'),

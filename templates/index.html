@@ -9,9 +9,6 @@
                 <div class="col-lg-4">
                     <input type="text" class="form-control name_search" placeholder="Chercher un article" >
                 </div>
-                <div class="col-lg-2">
-                    <button class="btn btn-primary search">>></button>
-                </div>
             </div>
             <hr>
             <thead>
@@ -39,6 +36,7 @@
             <tr>
                 <th class="text-center">Article</th>
                 <th class="text-center">Stock</th>
+                <th style="width: 15%;">Ajouter</th>
             </tr>
             </thead>
             <tbody class="product-table-body text-center">
@@ -47,6 +45,11 @@
                         <tr>
                             <td>{{ p.name }}</td>
                             <td>{{ p.product_available_items|floatformat:'-2' }}</td>
+                            <td>
+                                <a href="{% url 'product:stockin_list' product_id=p.id %}"><button class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></button></a>
+                                <!-- commenyted for now cause if it's deleted the factor wwill no longer be available unless change on_delete in models -->
+                                <!-- <button class="btn btn-danger btn-xs deleteproduct" title="Supprimer" data-id="{{p.id}}"><i class="fa fa-trash-o"></i></button> -->
+                            </td>
                         </tr>
                     {% endif %}
                 {% endfor %}    
@@ -160,18 +163,63 @@
 {% block scripts %}
 {{ block.super }}
 <script>
-    $('.search').on('click', function () {
-        $.ajax({
-            url: "/product/product_search",
-            type: "POST",
-            data: {
-                'name': $('.name_search').val(),
-            },
-            success: function (data) {
-                $('.name_search').val('')
-                $('.product_search_result').html(data.data)
-            }
+    $(function () {
+        // $('.name_search').autocomplete({
+        //     source: function (request, response) {
+        //         $.ajax({
+        //             url: "/product/product_search",
+        //             type: "POST",
+        //             data: {
+        //                 'name': $('.name_search').val(),
+        //             },
+        //             success: function (data) {
+        //                 response(data.data)
+        //             }
+        //         })
+        //     },
+        //     select: function (event, ui) {
+        //         $('.name_search').val(ui.item.label);
+        //         return false;
+        //     }
+        // });
+        $('.name_search').on('change', function () {
+            $.ajax({
+                url: "/product/product_search",
+                type: "POST",
+                data: {
+                    'name': $('.name_search').val(),
+                },
+                success: function (data) {
+                    $('.product_search_result').html(data.data)
+                }
+            })
+        });
+        $('.deleteproduct').each((i, el)=>{
+            $(el).on('click', ()=>{
+                t=$(el)
+                if (confirm('Supprimer ?')){
+                    $.ajax({
+                        url: "{% url 'product:delete_product' %}",
+                        type: "POST",
+                        data: {
+                            'id': t.attr('data-id'),
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            if (data.status == 'success'){
+                                t.parent().parent().remove()
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data)
+                        }
+                    });
+                }
+            })
         })
+    
     });
+    
 </script>
 {% endblock %}

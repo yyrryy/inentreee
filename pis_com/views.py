@@ -67,10 +67,7 @@ class LogoutView(RedirectView):
     def get(self, request, *args, **kwargs):
         return HttpResponseRedirect(reverse('login'))
 
-def home(request):
-    object_list=request.user.retailer_user.retailer.retailer_product.all().order_by('name')
-    print(object_list)
-    return render('index.html', {'object_list':object_list})
+
 class HomePageView(ListView):
     template_name = 'index.html'
 

@@ -8,7 +8,7 @@ from django.urls import reverse, reverse_lazy
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.db.models import Sum
-from pis_product.models import PurchasedProduct, ExtraItems, ClaimedProduct,StockOut, StockIn, Product
+from pis_product.models import PurchasedProduct, ExtraItems, ClaimedProduct,StockOut, StockIn, Product, ProductDetail
 from pis_product.forms import (
     ProductForm, ProductDetailsForm, ClaimedProductForm,StockDetailsForm,StockOutForm)
 from django.utils import timezone
@@ -292,6 +292,7 @@ class ClaimedItemsListView(TemplateView):
 
 class StockItemList(ListView):
     template_name = 'products/stock_list.html'
+    paginate_by=50
     model = Product
     ordering = 'name'
 
@@ -317,10 +318,26 @@ class StockItemList(ListView):
         return queryset.order_by('name')
 
     def get_context_data(self, **kwargs):
+        p=Product.objects.all()
+        t=[]
+        nstock=[]
+        for i in p:
+            if i.product_available_items() < 10 and i.product_available_items() > 0:
+                t.append(i)
         context = super(StockItemList, self).get_context_data(**kwargs)
         context.update({
             'search_value_name': self.request.GET.get('name'),
-            'title':"Liste des produits"
+            'title':"Liste des produits",
+            # get total products
+            'total_products': Product.objects.all().count(),
+            # get how many products that are <= 10 items in stock
+            'low_stock': len(t),
+
+            # get how many products that are out of stock from products model
+            'out_of_stock': Product.objects.filter(
+                product_detail__available_item=0).count(),
+
+
         })
         return context
 
@@ -486,3 +503,11 @@ class StockInUpdateView(UpdateView):
     
     def form_invalid(self, form):
         return super(StockInUpdateView, self).form_invalid(form)
+
+
+def deleteproduct(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('id')
+        product = Product.objects.get(id=product_id)
+        product.delete()
+        return JsonResponse({'status': 'success'})
