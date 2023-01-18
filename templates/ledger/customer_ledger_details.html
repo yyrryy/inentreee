@@ -32,7 +32,12 @@
                             <tr>
                                 <td>{{ ledger.dated |date:'d/m/Y' }}</td>
                                 <td>{{ ledger.amount|floatformat:-2}}</td>
-                                <td>{{ ledger.invoice.receipt_no }}</td>
+                                <td> 
+                                    {% if ledger.amount > 0 %}
+                                    <a href="{% url 'sales:invoice_update' id=ledger.invoice.id %}">{{ ledger.invoice.receipt_no }}</a></td>
+                                    {% else %}
+                                    {{ ledger.invoice.receipt_no }}
+                                    {% endif %}
                             </tr>
                             {% endfor %}
                             </tbody>

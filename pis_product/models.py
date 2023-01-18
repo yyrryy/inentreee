@@ -9,7 +9,7 @@ from pis_com.models import DatedModel
 
 class Product(models.Model):
 
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     brand_name = models.CharField(max_length=200, blank=True, null=True)
     retailer = models.ForeignKey(
         'pis_retailer.Retailer',

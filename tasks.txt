@@ -14,9 +14,9 @@ then assign it to retailer-user in retailer model
 
 
 tasks
-horizontal menu
-ajax not refresh
+horizontal menu //
+ajax not refresh //
 
-faacteurization pour les clients sous form de societé
-details des produits 
-products in pages
+faacteurization pour les clients sous form de societé 
+details des produits //
+products in pages //

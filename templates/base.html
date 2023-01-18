@@ -60,32 +60,64 @@
     </style>
     
     <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/zabuto_calendar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'js/gritter/css/jquery.gritter.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'lineicons/style.css' %}">
     <!-- Custom styles for this template -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/style-responsive.css' %}" rel="stylesheet">
 
-    <script src="{% static 'js/chart-master/Chart.js' %}"></script>
 
-    <link href="{% static 'css/profileImage.css' %}" rel="stylesheet" type="text/css"/>
-    <link href="{% static 'css/sweetalert2.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/select2.min.css' %}" rel="stylesheet" />
     <script src="{% static 'js/jquery.min.1.7.js'%}"></script>
 </head>
 
 <body>
 
 <section id="container" >
-
-    <header class="header black-bg d-flex justify-content-between">
-        <div>
-            <a href="{% url 'index' %}" class="logo"><b>{{ request.user.retailer_user.retailer.name }}</b></a>
+    <nav class="header navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">{{ request.user.retailer_user.retailer.name }}</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
         </div>
+      </nav>
+    <header class="header black-bg d-flex justify-content-between">
+
+        <div class="container-fluid">
+            <a href="{% url 'index' %}" class="logo fa fa-home"><b>{{ request.user.retailer_user.retailer.name }}</b></a>
+        </div>
+        
         <nav class="navbar navbar-expand-lg navbar-dark">
             
-          
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -121,42 +153,9 @@
 
 <!-- js placed at the end of the document so the pages load faster -->
 {% block scripts %}
-<script src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
-<script src="{% static 'js/select2.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'js/zabuto_calendar.js' %}"></script>
-<script src="{% static 'js/zabuto_calendar.js' %}"></script>
-
-<script type="application/javascript">
-        $(document).ready(function () {
-            $('.select2').select2();
-
-            $("#my-calendar").zabuto_calendar({
-                action: function () {
-                    return myDateFunction(this.id, false);
-                },
-                action_nav: function () {
-                    return myNavFunction(this.id);
-                },
-                ajax: {
-                    url: "show_data.php?action=1",
-                    modal: true
-                },
-                legend: [
-                    {type: "text", label: "Special event", badge: "00"},
-                    {type: "block", label: "Regular event", }
-                ]
-            });
-        });
 
 
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
-    </script>
 
 <script src="{% static 'js/javascript-functions.js' %}" type="text/javascript"></script>
 {% endblock %}

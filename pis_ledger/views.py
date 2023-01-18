@@ -188,9 +188,8 @@ class CustomerLedgerDetailsView(TemplateView):
             )
         except Customer.DoesNotExist:
             raise Http404
-        print(customer.customer_name)
         ledgers = customer.customer_ledger.all()
-        print(ledgers)
+     
         if ledgers:
             ledger_total = 0 if ledgers.aggregate(Sum('amount')) == None else ledgers.aggregate(Sum('amount'))
             print(ledgers[0].amount)

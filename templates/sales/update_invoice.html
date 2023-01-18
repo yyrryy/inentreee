@@ -40,6 +40,7 @@
 					<hr>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
+                            <input type="hidden" name="invoiceid" value="{{invoice.id}}">
 							<div><strong>Client:</strong> <span style="float: right" >{{ invoice.created_at.date }}</span></div><br>
 							<div class="existing-customer">
                                
@@ -297,7 +298,7 @@
                         totalQty: totalQty,
                         remaining_amount: remaining_amount,
                         paid_amount: paid_amount,
-                        invoice_id: '{{ invoice.id }}',
+                        invoice_id: $('[name=invoiceid]').val(),
                         items: JSON.stringify(items)
                     }, function (result, status) {
                         window.location.href = '/sales/invoice/'+ result.invoice_id +/detail/;

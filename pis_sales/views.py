@@ -219,21 +219,20 @@ class GenerateInvoiceAPIView(View):
             self.invoice.save()
 
             if self.customer or self.request.POST.get('customer_id'):
-                if float(remaining_payment):
-                    ledger_form_kwargs = {
-                        'retailer': self.request.user.retailer_user.retailer.id,
-                        'customer': (
-                            self.request.POST.get('customer_id') or
-                            self.customer.id),
-                        'invoice': self.invoice.id,
-                        'amount': remaining_payment,
-                        
-                        'dated': timezone.now()
-                    }
+                ledger_form_kwargs = {
+                    'retailer': self.request.user.retailer_user.retailer.id,
+                    'customer': (
+                        self.request.POST.get('customer_id') or
+                        self.customer.id),
+                    'invoice': self.invoice.id,
+                    'amount': remaining_payment,
+                    
+                    'dated': timezone.now()
+                }
 
-                    ledgerform = LedgerForm(ledger_form_kwargs)
-                    if ledgerform.is_valid():
-                        ledger = ledgerform.save()
+                ledgerform = LedgerForm(ledger_form_kwargs)
+                if ledgerform.is_valid():
+                    ledger = ledgerform.save()
 
             return JsonResponse({'invoice_id': self.invoice.id})
 

@@ -15,9 +15,9 @@
                     Ajouter
                 </button>
             </form>
-            <!-- <button type="button" class="btn btn-success addoneproduct" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-success addoneproduct" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Ajouter un article
-            </button> -->
+            </button>
         </div>
         <table class="table table-striped table-bordered table-advance table-hover item-table">
             
@@ -36,10 +36,11 @@
                         </a>
                     {% endfor %}
                 </div>
-                <div class="bg-danger p-3 text-white rounded">
-                    {{low_stock}}
-                </div>
+                <a class="text-danger" href=" {% url 'product:lowstock' %} ">
+                    Alert du Stock <span class="bg-danger rounded px-3 text-white">{{p_n}}</span>
+                </a>
             </div>
+
             <div class="input-group custom-search-form col-md-4" style="left: 5px">
                 <input type="text" class="form-control search-product" placeholder="Search...">
                 <span class="input-group-btn">
@@ -95,23 +96,26 @@
       <div class="modal-content">
         
         <div class="modal-body">
-          <form action="" method="post">
-            <div class="form-group">
+          <form class="addoneproductform" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
                 <input class="form-control" required type="text" name="productname" placeholder="Article">
             </div>
-            <input type="text" class="form-control" name="productprice" placeholder="Prix vent">
-            <input type="text" class="form-control" name="productprachat" placeholder="Prix achat">    
-            <div class="form-group">
-                <input class="form-control" required type="text" name="productbrand" placeholder="Marque">
+            <div class="mb-3">
+                <input required type="number" class="form-control" name="productprice" placeholder="Prix vent">
             </div>
-            <div class="form-group">
-                <input class="form-control" type="text" name="productunit" placeholder="Unité">
+            <div class="mb-3">
+                <input type="number" required class="form-control" name="productprachat" placeholder="Prix achat">    
             </div>
-            <div class="form-group">
-                <input class="form-control" required type="text" name="productstock" placeholder="Stock">
+            <div class="mb-3">
+                <input class="form-control" required type="number" name="productstock" placeholder="Stock">
             </div>
-            <button type="submit">Ajouter</button>
-          </form>
+            <div class="mb-3">
+                <input class="form-control" type="text" name="productbrand" placeholder="Marque">
+            </div>
+            <button type="submit" class="btn btn-primary addoneproductbtn">Submit</button>
+
+        </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -261,14 +265,47 @@
                 }
             })
         })
+    
+        $('.addoneproductbtn').on('click', (e)=>{
+            if ($('[name=productname]').val() == '' || $('[name=productprice]').val() == '' || $('[name=productstock]').val() == '' || $('[name=productprachat]').val() == '' ){
+                alert('Veuillez remplir tous les champs')
+                return
+            }
+            e.preventDefault();
+            // send data to server
+            $.ajax({
+                url: "{% url 'product:addoneproduct' %}",
+                type: "POST",
+                data: {
+                    'name':$('[name=productname]').val(),
+                    'brand':$('[name=productbrand]').val(),
+                    'price':$('[name=productprice]').val(),
+                    'stock':$('[name=productstock]').val(),
+                    'prachat':$('[name=productprachat]').val(),
+                    'unit':$('[name=productunit]').val(),
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                    console.log(data)
+                    $('.product-table-body').prepend(`
+                            <tr>
+                                <td>${data.data.name}</td>
+                                <td>${data.data.brand}</td>
+                                <td>${data.data.stock}</td>
+                                <td>
+                                    <a href="{% url 'product:update_product' pk=0 %}${data.data.id}"><button class="btn btn-success btn-xs"><i class="fa fa-edit"></i></button></a>
+                                    <a href="{% url 'product:stockin_list' product_id=0 %}${data.data.id}"><button class="btn btn-primary btn-xs"><i class="fa fa-plus
+                                    "></i></button></a>
+                                    <a href="{% url 'product:stockout_list' product_id=0 %}${data.data.id}"><button class="btn btn-danger btn-xs" title="Stock Out"><i class="fa fa-minus"></i></button></a>
+                                </td>
+                            </tr>
+                        `)
+                    // clear form   
+                    $('form')[2].reset()
+                },
+        })
     });
-$('#add-product').on('click', function() {
-    var $this = $(this);
-  $this.button('loading');
-    setTimeout(function() {
-       $this.button('reset');
-   }, 5000);
-});
+    }); 
 
 </script>
 {% endblock %}

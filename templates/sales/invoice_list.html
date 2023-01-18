@@ -40,8 +40,9 @@
                             <td>{{ invoice.remaining_payment|floatformat:-2 }}</td>
                             <td>{{ invoice.created_at|date:"d/m/Y" }}</td>
                             <td>
-                                {% if invoice.remaining_payment > 0 %}
-                                <a href="{% url 'sales:invoice_update' id=invoice.id %}"><button class="btn btn-primary btn-xs"><i class="fa fa-edit" title="Invoice list"></i></button>{%endif%}</a>
+                                <!-- {% if invoice.remaining_payment > 0 %}
+                                <a href="{% url 'sales:invoice_update' id=invoice.id %}"><button class="btn btn-primary btn-xs"><i class="fa fa-edit" title="Invoice list"></i></button></a>{%endif%} -->
+                                <a href="{% url 'sales:invoice_update' id=invoice.id %}"><button class="btn btn-primary btn-xs"><i class="fa fa-edit" title="Invoice list"></i></button></a>
                                 <a href="{% url 'sales:invoice_detail' invoice_id=invoice.id %}"><button class="btn btn-success btn-xs"><i class="fa fa-eye" title="Invoice list"></i></button></a>
                                 <button class="btn btn-danger btn-xs" onClick="deleteFunction({{invoice.id}})"><i class="fa fa-minus"></i></button></td>
 

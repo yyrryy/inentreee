@@ -49,6 +49,50 @@ def addbulk(request):
     #return a json response
     return redirect('product:stock_items_list')
 
+def lowstock(request):
+    products = Product.objects.all()
+    low=[]
+    for i in products:
+        if i.product_available_items()<=10:
+            low.append(i)
+    return render(request, 'products/lowstock.html', {'products': low})
+
+@csrf_exempt
+def addoneproduct(request):
+    # get data from formData sent from the ajax request
+    name = request.POST.get('name')
+    price = request.POST.get('price')
+    prachat = request.POST.get('prachat') 
+    brand = request.POST.get('brand')
+    stock=request.POST.get('stock')
+    product=Product.objects.create(
+        retailer=request.user.retailer_user.retailer,
+        name=name,
+        brand_name=brand,
+        price=price,
+        pr_achat=prachat
+    )
+    StockIn.objects.create(
+        product=product,
+        quantity=stock,
+    )
+    print(product)
+    #return a json response without serialaize error data as product is not json serializable
+    return JsonResponse({
+        'data':{
+            'name':product.name,
+            'price':product.price,
+            'prachat':product.pr_achat,
+            'brand':product.brand_name,
+            'stock':product.product_available_items(),
+            'id':product.id
+        }
+    })
+
+
+
+
+
 
 class ProductItemList(TemplateView):
     template_name = 'products/product_list.html'

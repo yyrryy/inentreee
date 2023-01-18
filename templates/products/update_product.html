@@ -12,13 +12,15 @@
                     <div class="form-group">
                         <div class="col-sm-12">
                             {% csrf_token %}
-                            <input type="text" class="form-control product_name" name="name"   placeholder="Product Name" value="{{ object.name|title }}"><br>
-                            <input type="text" class="form-control product_name" name="price"   placeholder="Product Name" value="{{ object.price }}"><br>
+                            <label><strong>Article</strong></label>
+                            <input type="text" class="form-control product_name" name="name"   placeholder="Article" value="{{ object.name|title }}"><br>
+                            <label><strong>Prix de vente</strong></label>
+                            <input type="text" class="form-control product_name" name="price"   placeholder="Prix" value="{{ object.price }}"><br>
+                            <label><strong>Prix d' achat</strong></label>
+                            <input type="text" class="form-control product_name" name="pr_achat"   placeholder="Prix d'achat" value="{{ object.pr_achat}}"><br>
                             <label><strong>marque</strong></label>
                             <input type="text" class="form-control brand_name" name="brand_name" placeholder="Brand Name" value="{{ object.brand_name|title }}"><br>
-                            <label><strong>Type (unt, kg, litre ...)</strong></label>
-                             <input type="text" class="form-control unit_type" name="unit_type" placeholder="Unit Type" list="unit-list" value="{{ object.unit_type }}">
-                                    
+                                  
                             <br>
                             
                             <input type="hidden" name="retailer" value="{{ request.user.retailer_user.retailer.id }}">

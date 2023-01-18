@@ -27,11 +27,15 @@
                 <div class="col-xs-12 col-md-12">
                     <div class="d-flex justify-content-between head align-itmes-center mt-5">
                         <div class="text-center">
-                            <img src="/media/images/retailer/logo/logo.png" width="140" height="45">
-                            
+                            <h3>
+                                {{ request.user.retailer_user.retailer.name }}
+                            </h3>
                         </div>
-                        
+                        {% if invoice.customer.customer_name == divers %}
                         <h6 style="font-size:14px">Bon de livraison N. {{ invoice.receipt_no }}</h6>
+                        {% else %}
+                        <h6 style="font-size:14px">Facture N. {{ invoice.receipt_no }}</h6>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-12">
@@ -66,6 +70,7 @@
                             <thead>
                             <tr class="item-row">
                                 <th >Article</th>
+                                <th >Prix unit</th>
                                 <th >Qté</th>
                                 <th >Total</th>
                             </tr>
@@ -75,6 +80,9 @@
                                 <tr id="hiderow">
                                     <td >
                                         {{ item.product.name}}
+                                    </td>
+                                    <td>
+                                        {{ item.product.price}}
                                     </td>
                                     <td >
                                         {{ item.quantity|floatformat:-2}}
@@ -141,12 +149,9 @@
                 <div class="col-xs-12 col-md-12" style="text-align: center;">
                     
                 </div>
-                <strong style="font-size:12px;color:#000">{{ request.user.retailer_user.retailer.name}}</strong>
-                <div class="col-lg-6 col-xs-12 d-flex justify-content-between">
-                    <span class="f-size">phone: {{ request.user.retailer_user.retailer.package_price}}</span>
-                    <span><p>
+                <div class="col-lg-6 col-xs-12 border text-center">
+                    <span class="f-size">{{ request.user.retailer_user.retailer.package_price}} - 
                         {{ request.user.retailer_user.retailer.package }}
-                    </p></span>
                 </div>
             </div>
         </div>
