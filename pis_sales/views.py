@@ -19,6 +19,13 @@ from pis_ledger.models import Ledger
 from pis_ledger.forms import LedgerForm
 from django.db import transaction
 from pis_com.models import Customer
+from django.shortcuts import render
+
+
+def facture(request, pk):
+    inv=SalesHistory.objects.get(id=pk)
+    return render(request, 'sales/invoicelyt.html', {'invoice':inv, 'product_details': inv.product_details,})
+
 
 class CreateInvoiceView(FormView):
     template_name = 'sales/create_invoice.html'

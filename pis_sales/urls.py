@@ -4,7 +4,7 @@ from django.urls import re_path
 from pis_sales.views import (
     GenerateInvoiceAPIView, ProductItemAPIView, CreateInvoiceView,
     UpdateInvoiceView, InvoiceDetailView, UpdateInvoiceAPIView, InvoicesList,
-    ProductDetailsAPIView, SalesDeleteView
+    ProductDetailsAPIView, SalesDeleteView, facture
 )
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     re_path(r'^invoice/(?P<invoice_id>\d+)/detail/$',InvoiceDetailView.as_view(),name='invoice_detail'),
     re_path(r'^api/product/details/$',ProductDetailsAPIView.as_view(),name='product_details_api'),
     re_path(r'^invoice/(?P<pk>\d+)/delete/$',SalesDeleteView.as_view(),name='delete'),
+    re_path(r'^facture/(?P<pk>\d+)/$',facture, name='facture'),
 ]

@@ -82,13 +82,13 @@
                                         {{ item.product.name}}
                                     </td>
                                     <td>
-                                        {{ item.product.price}}
+                                        {{ item.product.price}} Dh
                                     </td>
                                     <td >
                                         {{ item.quantity|floatformat:-2}}
                                     </td>
                                     <td >
-                                        {{ item.purchase_amount|floatformat:-2 }}
+                                        {{ item.purchase_amount|floatformat:-2 }} Dh
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -125,19 +125,19 @@
                             <tr>
                                 <td><strong >Total Quantity: </strong><span id="totalQty" style="color: red; font-weight: bold;">{{ invoice.total_quantity }} </span> </td>
                                 <td class="text-right" ><strong >Total</strong></td>
-                                <td><span id="grandTotal" style="color: red;">{{ invoice.grand_total|floatformat:-2 }}</span></td>
+                                <td><span id="grandTotal" style="color: red;">{{ invoice.grand_total|floatformat:-2 }} Dh</span></td>
                             </tr>
                             
                             
                             <tr>
                                 <td></td>
                                 <td class="text-right"><strong >Mantant payé</strong></td>
-                                <td><span id="receivedAmount" >{{ invoice.paid_amount|floatformat:-2 }}</span></td>
+                                <td><span id="receivedAmount" >{{ invoice.paid_amount|floatformat:-2 }} Dh</span></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td class="text-right" ><strong >Mantant resté</strong></td>
-                                <td><span id="remainingAmount">{{ invoice.remaining_payment|floatformat:-2 }}</span></td>
+                                <td><span id="remainingAmount">{{ invoice.remaining_payment|floatformat:-2 }} Dh</span></td>
                             </tr>
                             </tbody>
                         </table>

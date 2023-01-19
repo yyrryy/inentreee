@@ -267,6 +267,7 @@
         })
     
         $('.addoneproductbtn').on('click', (e)=>{
+            $('.addoneproductbtn').attr('disabled', true)
             if ($('[name=productname]').val() == '' || $('[name=productprice]').val() == '' || $('[name=productstock]').val() == '' || $('[name=productprachat]').val() == '' ){
                 alert('Veuillez remplir tous les champs')
                 return
@@ -302,7 +303,10 @@
                         `)
                     // clear form   
                     $('form')[2].reset()
+                    location.reload()
                 },
+                // refresh 
+
         })
     });
     }); 
