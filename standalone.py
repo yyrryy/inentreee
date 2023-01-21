@@ -1,20 +1,33 @@
-import sys
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QProcess, QThread
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-from PyQt5.QtWidgets import QApplication
-import subprocess
+from PyQt5.QtWidgets import QApplication, QLabel
+from PyQt5.QtCore import QUrl
 
-def start_django_server():
-    subprocess.call(["python", "manage.py", "runserver"])
+class ServerThread(QThread):
+    def run(self):
+        process = QProcess()
+        process.startDetached("python manage.py runserver")
 
-def launch_chrome():
-    subprocess.call(["chromium-browser", "http://127.0.0.1:8000/"])
+app = QApplication([])
 
-app = QApplication(sys.argv)
-view = QWebEngineView()
-view.load(QUrl("http://127.0.0.1:8000/"))
-view.show()
+# Create a label to display the message
+label = QLabel("Loading...", alignment=Qt.AlignCenter)
+label.setStyleSheet("font-size: 30px;") # you can adjust the font size as per your requirement
+label.show()
 
-start_django_server()
-launch_chrome()
-sys.exit(app.exec_())
+# Start the Django development server in a separate thread
+server_thread = ServerThread()
+server_thread.start()
+
+# Wait for the server to start
+import time
+time.sleep(3)
+
+web_view = QWebEngineView()
+web_view.load(QUrl("http://localhost:8000"))
+web_view.show()
+
+# Hide the label when the server is started
+label.hide()
+
+app.exec_()
