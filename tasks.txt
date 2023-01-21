@@ -20,3 +20,6 @@ ajax not refresh //
 faacteurization pour les clients sous form de societé 
 details des produits //
 products in pages //
+
+modify the invoice creation
+modify product page

@@ -65,10 +65,7 @@ class ProductItemAPIView(View):
     
     def get(self, request, *args, **kwargs):
 
-        products = (
-            self.request.user.retailer_user.retailer.
-            retailer_product.all()
-        )
+        products = Product.objects.all()
 
         items = []
 

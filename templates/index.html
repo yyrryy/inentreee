@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="container mb-5">
-    <br><br>
     <div class="bg-white rounded shadow p-2">
+       
         <table class="mb-5 table table-striped table-bordered table-advance table-hover item-table">
             <div class="row" style="padding: 5px">
                 <div class="">
@@ -27,10 +27,14 @@
        
     </div>
 
-    <div class="bg-white shadow rounded mt-3 p-3">
+    <div class="bg-white shadow rounded mt-3 p-3 d-flex justify-content-between">
+        
         <a class="text-danger" href=" {% url 'product:lowstock' %} ">
             Alert du Stock <span class="bg-danger rounded px-3 text-white">{{p_n}}</span>
         </a>
+        <p>
+            Total articles: {{length}}
+        </p> 
     </div>
     <br><br>
 
@@ -179,8 +183,12 @@
         //         return false;
         //     }
         // });
-        $('.name_search').on('change', function () {
-            $.ajax({
+        $('.name_search').on('input', function () {
+            if ($('.name_search').val()==''){
+                $('.product_search_result').html('')
+            }
+            else{
+                $.ajax({
                 url: "/product/product_search",
                 type: "POST",
                 data: {
@@ -190,7 +198,9 @@
                     $('.product_search_result').html(data.data)
                 }
             })
+            }
         });
+        
         $('.deleteproduct').each((i, el)=>{
             $(el).on('click', ()=>{
                 t=$(el)

@@ -141,7 +141,7 @@
     </header>
     <section class="wrapper">
         {% product_notifications retailer_id=request.user.retailer_user.retailer.id as p_n %}
-
+        {% lenproducts as length %}
         {% block content %}{% endblock %}
     </section>
     <footer>
