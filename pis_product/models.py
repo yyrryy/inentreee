@@ -118,7 +118,7 @@ post_save.connect(create_save_bar_code, sender=Product)
 
 class StockIn(models.Model):
     product = models.ForeignKey(
-        Product, related_name='stockin_product',on_delete=models.CASCADE
+        Product, related_name='stockin_product',on_delete=models.CASCADE, default=None
     )
     quantity = models.CharField(
         max_length=100, blank=True, null=True
@@ -130,7 +130,7 @@ class StockIn(models.Model):
 
 class ProductDetail(DatedModel):
     product = models.ForeignKey(
-        Product, related_name='product_detail',on_delete=models.CASCADE
+        Product, related_name='product_detail',on_delete=models.CASCADE, default=None
     )
     retail_price = models.DecimalField(
         max_digits=65, decimal_places=2, default=0
@@ -147,7 +147,7 @@ class ProductDetail(DatedModel):
 
 class PurchasedProduct(DatedModel):
     product = models.ForeignKey(
-        Product, related_name='purchased_product',on_delete=models.CASCADE
+        Product, related_name='purchased_product',on_delete=models.CASCADE, default=None
     )
     invoice = models.ForeignKey(
         'pis_sales.SalesHistory', related_name='purchased_invoice',
@@ -172,7 +172,7 @@ class PurchasedProduct(DatedModel):
 
 class ExtraItems(DatedModel):
     retailer = models.ForeignKey(
-        'pis_retailer.Retailer', related_name='retailer_extra_items',on_delete=models.CASCADE
+        'pis_retailer.Retailer', related_name='retailer_extra_items',on_delete=models.CASCADE, default=None
     )
     item_name = models.CharField(
         max_length=100, blank=True, null=True)
@@ -190,7 +190,7 @@ class ExtraItems(DatedModel):
 
 
 class ClaimedProduct(DatedModel):
-    product = models.ForeignKey(Product, related_name='claimed_product',on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='claimed_product',on_delete=models.CASCADE, default=None)
     customer = models.ForeignKey(
         'pis_com.Customer', related_name='customer_claimed_items',
         null=True, blank=True,on_delete=models.CASCADE
@@ -206,7 +206,7 @@ class ClaimedProduct(DatedModel):
 
 class StockOut(models.Model):
     product = models.ForeignKey(
-        Product, related_name='stockout_product',on_delete=models.CASCADE
+        Product, related_name='stockout_product',on_delete=models.CASCADE, default=None
     )
     invoice = models.ForeignKey(
         'pis_sales.SalesHistory', related_name='out_invoice',
@@ -231,14 +231,7 @@ class StockOut(models.Model):
 
 # Signals
 def purchase_product(sender, instance, created, **kwargs):
-    """
-    TODO: Zaheer Please check this function is useful or not.
-    :param sender:
-    :param instance:
-    :param created:
-    :param kwargs:
-    :return:
-    """
+    
     product_items = (
         instance.product.product_detail.filter(
             available_item__gt=0).order_by('created_at')

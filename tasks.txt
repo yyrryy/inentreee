@@ -21,5 +21,7 @@ faacteurization pour les clients sous form de societé
 details des produits //
 products in pages //
 
+pip install pyqt5 and PyQtWebEngine
+
 modify the invoice creation
 modify product page
